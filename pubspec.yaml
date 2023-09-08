@@ -1,0 +1,26 @@
+name: games_app
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  fluttertoast: ^8.2.2
+  google_fonts: ^5.1.0
+  carousel_slider: ^4.2.1
+  group_list_view: ^1.1.1
+  badges: ^3.1.2
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - images/.
