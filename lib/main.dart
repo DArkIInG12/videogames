@@ -26,6 +26,10 @@ class _FirstScreen extends State<FirstScreen> {
         !GlobalValues.games.value[GlobalValues.index.value].isFavorite;
   }
 
+  void _alert() {
+    GlobalValues.centinel.value = !GlobalValues.centinel.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,33 +55,37 @@ class _FirstScreen extends State<FirstScreen> {
                   ],
                 ),
                 actions: [
-                  badges.Badge(
-                    position: badges.BadgePosition.topEnd(end: -6),
-                    badgeAnimation: const badges.BadgeAnimation.rotation(
-                      animationDuration: Duration(seconds: 1),
-                      loopAnimation: false,
-                      curve: Curves.fastOutSlowIn,
-                      colorChangeAnimationCurve: Curves.easeInCubic,
-                    ),
-                    badgeContent:
-                        Text(GlobalValues.cart.value.length.toString()),
-                    showBadge: true,
-                    badgeStyle: const badges.BadgeStyle(
-                      shape: badges.BadgeShape.circle,
-                      badgeColor: Colors.white,
-                      elevation: 0,
-                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                    ),
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/cart');
-                      },
-                    ),
-                  ),
+                  ValueListenableBuilder(
+                      valueListenable: GlobalValues.centinel,
+                      builder: (context, value, _) {
+                        return badges.Badge(
+                          position: badges.BadgePosition.topEnd(end: -6),
+                          badgeAnimation: const badges.BadgeAnimation.rotation(
+                            animationDuration: Duration(seconds: 1),
+                            loopAnimation: false,
+                            curve: Curves.fastOutSlowIn,
+                            colorChangeAnimationCurve: Curves.easeInCubic,
+                          ),
+                          badgeContent:
+                              Text(GlobalValues.cart.value.length.toString()),
+                          showBadge: true,
+                          badgeStyle: const badges.BadgeStyle(
+                            shape: badges.BadgeShape.circle,
+                            badgeColor: Colors.white,
+                            elevation: 0,
+                            padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                          ),
+                          child: IconButton(
+                            icon: const Icon(
+                              Icons.shopping_cart,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/cart');
+                            },
+                          ),
+                        );
+                      }),
                   const SizedBox(
                     width: 20.0,
                   ),
@@ -206,16 +214,27 @@ class _FirstScreen extends State<FirstScreen> {
                                             GlobalValues.games.value[value])) {
                                           GlobalValues.cart.value.add(
                                               GlobalValues.games.value[value]);
-                                        } else {
                                           Fluttertoast.showToast(
-                                              msg: "This is Center Short Toast",
+                                              msg:
+                                                  "El articulo se agrego a su carrito",
                                               toastLength: Toast.LENGTH_SHORT,
                                               gravity: ToastGravity.CENTER,
                                               timeInSecForIosWeb: 1,
                                               backgroundColor: Colors.red,
-                                              textColor: Colors.white,
-                                              fontSize: 16.0);
+                                              textColor: Colors.black,
+                                              fontSize: 26.0);
+                                        } else {
+                                          Fluttertoast.showToast(
+                                              msg:
+                                                  "Este articulo ya se encuentra en su carrito",
+                                              toastLength: Toast.LENGTH_SHORT,
+                                              gravity: ToastGravity.CENTER,
+                                              timeInSecForIosWeb: 1,
+                                              backgroundColor: Colors.red,
+                                              textColor: Colors.black,
+                                              fontSize: 26.0);
                                         }
+                                        _alert();
                                       },
                                       child: const Text(
                                         'Add to cart',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:games_app/global_values.dart';
 
 class CounterDesign extends StatefulWidget {
   const CounterDesign({super.key});

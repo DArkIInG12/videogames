@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:games_app/game.dart';
 
 class GlobalValues {
+  static double itemPrice = 0;
   static ValueNotifier<int> index = ValueNotifier<int>(0);
   static ValueNotifier<bool> centinel = ValueNotifier<bool>(true);
 
